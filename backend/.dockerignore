@@ -1,0 +1,7 @@
+__pycache__
+myenv
+.env
+.git
+.gitignore
+antigravity.db
+test_auth.py
