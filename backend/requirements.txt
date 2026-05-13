@@ -4,7 +4,7 @@ python-jose[cryptography]
 passlib[bcrypt]
 pydantic
 sqlalchemy
-google-genai
+groq
 python-dotenv
 python-multipart
 requests

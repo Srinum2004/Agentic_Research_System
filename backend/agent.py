@@ -4,24 +4,25 @@ import asyncio
 import requests
 from datetime import datetime
 from dotenv import load_dotenv
-from google import genai
+from groq import Groq
 
 # --------------------------------------------------
 # ENV SETUP
 # --------------------------------------------------
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
-if not GOOGLE_API_KEY:
-    raise RuntimeError("GOOGLE_API_KEY not found in .env")
+if not GROQ_API_KEY:
+    raise RuntimeError("GROQ_API_KEY not found in .env")
 
 if not SERPAPI_API_KEY:
     raise RuntimeError("SERPAPI_API_KEY not found in .env")
 
-# Create Gemini client ONCE
-client = genai.Client(api_key=GOOGLE_API_KEY)
+# Create Groq client ONCE
+client = Groq(api_key=GROQ_API_KEY)
 
 # --------------------------------------------------
 # REAL WEB SEARCH TOOL (SERPAPI)
@@ -100,23 +101,35 @@ async def perform_research(query: str) -> dict:
     await asyncio.sleep(0.1)
 
     # Step 3: LLM reasoning
-    steps.append("Sending context to Gemini for reasoning")
+    steps.append(f"Sending context to Groq ({GROQ_MODEL}) for reasoning")
 
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
-            contents=(
-                f"User Query:\n{query}\n\n"
-                f"Context:\n{search_context}\n\n"
-                "Answer clearly. If sources are provided, use them. "
-                "If not, clearly state that the answer is based on general knowledge."
-            ),
+        response = client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a research assistant. Answer clearly using the "
+                        "provided web search context when available. If no sources "
+                        "are provided, clearly state that the answer is based on "
+                        "general knowledge."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"User Query:\n{query}\n\n"
+                        f"Context:\n{search_context}"
+                    ),
+                },
+            ],
         )
-        output = response.text
-        steps.append("Gemini reasoning completed")
+        output = response.choices[0].message.content
+        steps.append("Groq reasoning completed")
     except Exception as e:
-        output = f"Gemini LLM Error: {str(e)}"
-        steps.append("Gemini reasoning failed")
+        output = f"Groq LLM Error: {str(e)}"
+        steps.append("Groq reasoning failed")
 
     end_time = time.time()
 

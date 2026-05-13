@@ -48,6 +48,7 @@ A powerful, full-stack **Agentic Web Research Application** that leverages the p
     SECRET_KEY=your_random_secret_key_for_jwt
     ```
 
+
 3.  **Launch the Application**:
     ```bash
     docker-compose up --build
@@ -85,3 +86,7 @@ Contributions are welcome! Please feel free to submit a Pull Request or open an 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+starsrinu2004@gmail.com
+Star@2004 ->user
+srinibashmishra2004@gmail.com
+Smishra9@   -> admin
