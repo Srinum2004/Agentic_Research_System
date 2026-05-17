@@ -16,6 +16,12 @@ import UserHistory from './UserHistory';
 import UserNotifications from './UserNotifications';
 import AdminRequests from './AdminRequests';
 
+// Paper Studio
+import PapersList from './PapersList';
+import PaperIntake from './PaperIntake';
+import PaperCanvas from './PaperCanvas';
+import VerifyPaper from './VerifyPaper';
+
 import './index.css';
 
 const ProtectedRoute = ({ children, role }) => {
@@ -55,6 +61,24 @@ function App() {
         <Route
           path="/notifications"
           element={<ProtectedRoute><UserNotifications /></ProtectedRoute>}
+        />
+
+        {/* Paper Studio */}
+        <Route
+          path="/papers"
+          element={<ProtectedRoute><PapersList /></ProtectedRoute>}
+        />
+        <Route
+          path="/papers/new"
+          element={<ProtectedRoute><PaperIntake /></ProtectedRoute>}
+        />
+        <Route
+          path="/papers/:id"
+          element={<ProtectedRoute><PaperCanvas /></ProtectedRoute>}
+        />
+        <Route
+          path="/verify"
+          element={<ProtectedRoute><VerifyPaper /></ProtectedRoute>}
         />
 
         {/* Admin Routes */}

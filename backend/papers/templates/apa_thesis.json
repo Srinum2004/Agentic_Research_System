@@ -1,0 +1,145 @@
+{
+  "key": "apa_thesis",
+  "name": "APA Research Paper / Thesis",
+  "description": "APA-style research paper or thesis chapter — common in social sciences, education, and psychology.",
+  "citation_style": "apa",
+  "paper_type": "experimental",
+  "default_journal_type": "APA-style journal or thesis chapter",
+  "include_tables": true,
+  "include_figures": true,
+  "num_sections": 12,
+  "sections": [
+    {
+      "key": "title_page",
+      "title": "Title Page",
+      "order": 1,
+      "purpose": "APA title page — title, author, affiliation, course (if a paper), instructor, due date.",
+      "word_limit": "40-80 words",
+      "what_to_include": ["Title (centered, bold)", "Author name", "Institutional affiliation", "Author note (if required)"],
+      "common_mistakes": ["Missing institutional affiliation", "Omitting author note"],
+      "formatting_notes": "APA 7th: title in upper half of page, centered, bold, Title Case.",
+      "citation_example": ""
+    },
+    {
+      "key": "abstract",
+      "title": "Abstract",
+      "order": 2,
+      "purpose": "Concise, single-paragraph summary of the study.",
+      "word_limit": "150-250 words",
+      "what_to_include": ["Research problem", "Participants/materials", "Method", "Findings", "Conclusion"],
+      "common_mistakes": ["Citing sources in abstract", "First-person 'I' usage"],
+      "formatting_notes": "One paragraph, no indentation, no citations.",
+      "citation_example": ""
+    },
+    {
+      "key": "keywords",
+      "title": "Keywords",
+      "order": 3,
+      "purpose": "Provide APA-style keywords directly below the abstract.",
+      "word_limit": "3-5 terms",
+      "what_to_include": ["Topic keywords"],
+      "common_mistakes": ["Too many keywords"],
+      "formatting_notes": "Italicised 'Keywords:' label followed by lowercase comma-separated list.",
+      "citation_example": ""
+    },
+    {
+      "key": "introduction",
+      "title": "Introduction",
+      "order": 4,
+      "purpose": "Establish topic, importance, prior research, gap, and research question(s).",
+      "word_limit": "700-1100 words",
+      "what_to_include": ["Topic introduction", "Significance", "Brief literature framing", "Research questions or hypotheses", "Overview of approach"],
+      "common_mistakes": ["No research question", "Long literature dump"],
+      "formatting_notes": "Heading uses Level 1 APA style (centered, bold, title case). Do NOT label this section 'Introduction' in APA 7th — the title functions as the introduction heading.",
+      "citation_example": "(Smith, 2023)"
+    },
+    {
+      "key": "literature_review",
+      "title": "Literature Review",
+      "order": 5,
+      "purpose": "Thematic review of prior empirical and theoretical work.",
+      "word_limit": "800-1200 words",
+      "what_to_include": ["Theoretical framework", "Empirical findings", "Synthesis across studies", "Gap statement"],
+      "common_mistakes": ["Annotated-bibliography feel"],
+      "formatting_notes": "Use Level 2 APA subheadings.",
+      "citation_example": "(Doe & Roe, 2022)"
+    },
+    {
+      "key": "method",
+      "title": "Method",
+      "order": 6,
+      "purpose": "Describe participants, design, materials, and procedure with full reproducibility.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Participants / sample", "Design", "Measures / instruments", "Procedure", "Data analysis plan"],
+      "common_mistakes": ["Missing participant demographics", "Vague procedure"],
+      "formatting_notes": "Use APA Level 2 subheadings: Participants, Design, Materials, Procedure.",
+      "citation_example": ""
+    },
+    {
+      "key": "results",
+      "title": "Results",
+      "order": 7,
+      "purpose": "Present findings with descriptive and inferential statistics; no interpretation.",
+      "word_limit": "600-900 words",
+      "what_to_include": ["Descriptive stats", "Inferential tests with effect sizes", "Tables and figures"],
+      "common_mistakes": ["Interpreting results here", "Missing effect sizes"],
+      "formatting_notes": "Report APA stats: M, SD, t(df) = X, p, d. Tables follow APA 7 format.",
+      "citation_example": ""
+    },
+    {
+      "key": "discussion",
+      "title": "Discussion",
+      "order": 8,
+      "purpose": "Interpret findings, link to prior work, and acknowledge limitations.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Summary of findings", "Connections to literature", "Theoretical and practical implications", "Limitations", "Future research"],
+      "common_mistakes": ["Repeating results", "Overgeneralising"],
+      "formatting_notes": "Use Level 2 subheadings for Implications, Limitations, Future Research.",
+      "citation_example": ""
+    },
+    {
+      "key": "conclusion",
+      "title": "Conclusion",
+      "order": 9,
+      "purpose": "Concise closing statement of the contribution.",
+      "word_limit": "150-250 words",
+      "what_to_include": ["Restated takeaway", "Practical or theoretical significance"],
+      "common_mistakes": ["Introducing new claims"],
+      "formatting_notes": "Optional in APA — fold into Discussion if the journal prefers.",
+      "citation_example": ""
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "order": 10,
+      "purpose": "Full APA 7 reference list of all cited works.",
+      "word_limit": "unbounded",
+      "what_to_include": ["Author, Year, Title, Source, DOI"],
+      "common_mistakes": ["Missing DOIs", "Incorrect capitalization"],
+      "formatting_notes": "APA 7: Surname, F. M. (Year). Title in sentence case. Journal Name, Volume(Issue), pp-pp. https://doi.org/...",
+      "citation_example": "Smith, J., & Johnson, A. (2023). A title in sentence case. Journal of X, 12(3), 1-9. https://doi.org/10.xxxx/xxxxx"
+    },
+    {
+      "key": "appendix_a",
+      "title": "Appendix A: Materials",
+      "order": 11,
+      "purpose": "Supplementary materials such as questionnaires, stimuli, or full instruments.",
+      "word_limit": "as needed",
+      "what_to_include": ["Instrument items", "Survey wording", "Stimuli"],
+      "common_mistakes": ["Burying critical detail in main body when it belongs in appendix"],
+      "formatting_notes": "Each appendix on a new page, labeled A, B, C.",
+      "citation_example": ""
+    },
+    {
+      "key": "appendix_b",
+      "title": "Appendix B: Supplementary Analyses",
+      "order": 12,
+      "purpose": "Additional analyses or robustness checks supporting the main findings.",
+      "word_limit": "as needed",
+      "what_to_include": ["Robustness tables", "Sensitivity analyses"],
+      "common_mistakes": ["Repeating main-text content"],
+      "formatting_notes": "Reference each table as Table B1, B2, etc.",
+      "citation_example": ""
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -10,12 +11,28 @@ import {
     BarChart3,
     Users,
     Rocket,
-    Bell
+    Bell,
+    FileText,
+    FileCheck,
+    Sun,
+    Moon,
+    ChevronLeft,
+    ChevronRight
 } from 'lucide-react';
+import useTheme from './useTheme';
 
 export default function Sidebar({ role }) {
     const navigate = useNavigate();
     const location = useLocation();
+    const [theme, toggleTheme] = useTheme();
+    const [collapsed, setCollapsed] = useState(() => {
+        if (typeof window === 'undefined') return false;
+        return localStorage.getItem('sidebar-collapsed') === '1';
+    });
+
+    useEffect(() => {
+        localStorage.setItem('sidebar-collapsed', collapsed ? '1' : '0');
+    }, [collapsed]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -33,17 +50,28 @@ export default function Sidebar({ role }) {
         { name: 'Settings', path: '/admin/settings', icon: Settings },
     ] : [
         { name: 'New Research', path: '/dashboard', icon: Rocket },
+        { name: 'Paper Studio', path: '/papers', icon: FileText },
+        { name: 'Verify Paper', path: '/verify', icon: FileCheck },
         { name: 'My History', path: '/history', icon: History },
         { name: 'My Profile', path: '/profile', icon: User },
         { name: 'Notifications', path: '/notifications', icon: Bell },
     ];
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+            <button
+                type="button"
+                className="sidebar-collapse-btn"
+                onClick={() => setCollapsed((c) => !c)}
+                aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+                {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+            </button>
+
             <div className="sidebar-logo">
-                <Rocket className="logo-icon" size={24} />
-                <span>Antigravity</span>
-                {isAdmin && <ShieldCheck size={14} style={{ color: 'var(--primary-color)', marginLeft: '-4px' }} />}
+                <img src="/logo.svg" alt="ThesiqX" className="brand-logo-img" />
+                {isAdmin && !collapsed && <ShieldCheck size={14} style={{ color: 'var(--primary-color)', marginLeft: '-4px' }} />}
             </div>
 
             <nav className="sidebar-nav">
@@ -52,9 +80,10 @@ export default function Sidebar({ role }) {
                         key={item.path}
                         className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
                         onClick={() => navigate(item.path)}
+                        title={collapsed ? item.name : undefined}
                     >
                         <item.icon size={20} />
-                        <span>{item.name}</span>
+                        <span className="nav-label">{item.name}</span>
                         {location.pathname === item.path && (
                             <motion.div
                                 layoutId="sidebar-active"
@@ -74,19 +103,34 @@ export default function Sidebar({ role }) {
             </nav>
 
             <div className="sidebar-footer">
-                <div className="nav-item logout" onClick={handleLogout}>
-                    <LogOut size={20} />
-                    <span>Logout</span>
+                <div
+                    className="nav-item theme-toggle-item"
+                    onClick={toggleTheme}
+                    role="button"
+                    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                >
+                    {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    <span className="nav-label">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
                 </div>
 
-                <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '12px' }}>
-                    <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--text-dim)', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
-                        Account Type
-                    </div>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {localStorage.getItem('role') === 'admin' ? 'Administrator' : 'Standard User'}
-                    </div>
+                <div
+                    className="nav-item logout"
+                    onClick={handleLogout}
+                    title={collapsed ? 'Logout' : undefined}
+                >
+                    <LogOut size={20} />
+                    <span className="nav-label">Logout</span>
                 </div>
+
+                {!collapsed && (
+                    <div className="account-type-box">
+                        <div className="account-type-label">Account Type</div>
+                        <div className="account-type-value">
+                            {localStorage.getItem('role') === 'admin' ? 'Administrator' : 'Standard User'}
+                        </div>
+                    </div>
+                )}
             </div>
         </aside>
     );

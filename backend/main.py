@@ -21,11 +21,21 @@ from auth import (
     ACCESS_TOKEN_EXPIRE_MINUTES
 )
 from agent import perform_research
+from papers.router import router as papers_router
+from papers.storage import ensure_bucket
 
 # Create tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Antigravity API", version="2.0.0")
+
+
+@app.on_event("startup")
+def _startup_minio():
+    try:
+        ensure_bucket()
+    except Exception as e:
+        print(f"[startup] MinIO bucket setup skipped: {e}")
 
 # CORS
 app.add_middleware(
@@ -566,6 +576,9 @@ def handle_request(
     db.add(notif)
     db.commit()
     return {"message": f"Request {handle_data.status}"}
+
+app.include_router(papers_router)
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

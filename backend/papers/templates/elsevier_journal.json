@@ -1,0 +1,156 @@
+{
+  "key": "elsevier_journal",
+  "name": "Elsevier Journal Article",
+  "description": "Elsevier journal article using the IMRaD-extended structure. Suits applied-sciences, engineering, and life-sciences journals.",
+  "citation_style": "elsevier",
+  "paper_type": "experimental",
+  "default_journal_type": "Elsevier journal (e.g. Expert Systems with Applications)",
+  "include_tables": true,
+  "include_figures": true,
+  "num_sections": 13,
+  "sections": [
+    {
+      "key": "title_page",
+      "title": "Title Page",
+      "order": 1,
+      "purpose": "Title, author block, affiliations, corresponding author, ORCIDs.",
+      "word_limit": "60-100 words",
+      "what_to_include": ["Title", "Authors with superscript affiliations", "Corresponding author email", "ORCIDs"],
+      "common_mistakes": ["Missing corresponding author", "No ORCIDs"],
+      "formatting_notes": "Per Elsevier guidance, place affiliations directly below the author list.",
+      "citation_example": ""
+    },
+    {
+      "key": "highlights",
+      "title": "Highlights",
+      "order": 2,
+      "purpose": "Three to five bullet sentences summarising the core contributions (Elsevier-specific).",
+      "word_limit": "max 85 characters per bullet, 3-5 bullets",
+      "what_to_include": ["Core finding bullets", "Method-novelty bullet"],
+      "common_mistakes": ["Sentences too long", "Vague claims"],
+      "formatting_notes": "Bullet list, each bullet under 85 characters.",
+      "citation_example": ""
+    },
+    {
+      "key": "abstract",
+      "title": "Abstract",
+      "order": 3,
+      "purpose": "Structured summary covering background, method, results, and conclusion.",
+      "word_limit": "200-300 words",
+      "what_to_include": ["Background", "Objective", "Method", "Results with metrics", "Conclusion"],
+      "common_mistakes": ["No quantitative results", "Citations inside the abstract"],
+      "formatting_notes": "Some Elsevier journals require a structured abstract — use the labels above if so.",
+      "citation_example": ""
+    },
+    {
+      "key": "keywords",
+      "title": "Keywords",
+      "order": 4,
+      "purpose": "Discovery keywords.",
+      "word_limit": "5-7 terms",
+      "what_to_include": ["Field-level terms", "Method-level terms"],
+      "common_mistakes": ["Reusing title words"],
+      "formatting_notes": "Semicolon-separated per Elsevier convention.",
+      "citation_example": ""
+    },
+    {
+      "key": "introduction",
+      "title": "1. Introduction",
+      "order": 5,
+      "purpose": "Frame the problem, establish significance, and state the contributions.",
+      "word_limit": "800-1100 words",
+      "what_to_include": ["Background", "Motivation", "Research gap", "Objectives", "Contributions", "Paper structure"],
+      "common_mistakes": ["No research gap", "No structure paragraph"],
+      "formatting_notes": "Numeric section heading. Close with a 'The rest of this paper is organised as follows' paragraph.",
+      "citation_example": "(Smith et al., 2023)"
+    },
+    {
+      "key": "literature_review",
+      "title": "2. Literature Review",
+      "order": 6,
+      "purpose": "Detailed survey of prior work with thematic synthesis.",
+      "word_limit": "800-1200 words",
+      "what_to_include": ["Thematic clusters", "Critical commentary", "Identification of gap"],
+      "common_mistakes": ["Descriptive only, no critique"],
+      "formatting_notes": "Use subsections 2.1, 2.2 etc.",
+      "citation_example": ""
+    },
+    {
+      "key": "methodology",
+      "title": "3. Materials and Methods",
+      "order": 7,
+      "purpose": "Methods, materials, and procedure — reproducibility is the bar.",
+      "word_limit": "900-1300 words",
+      "what_to_include": ["Dataset / materials", "Pre-processing", "Method details", "Equations", "Procedure"],
+      "common_mistakes": ["Insufficient detail to reproduce"],
+      "formatting_notes": "Use subsections 3.1, 3.2 etc. Number all equations.",
+      "citation_example": ""
+    },
+    {
+      "key": "experimental_setup",
+      "title": "4. Experimental Setup",
+      "order": 8,
+      "purpose": "Define metrics, baselines, hardware, and evaluation protocol.",
+      "word_limit": "400-700 words",
+      "what_to_include": ["Metrics", "Baselines", "Implementation details", "Hardware"],
+      "common_mistakes": ["Missing baselines"],
+      "formatting_notes": "Tabulate baseline configurations.",
+      "citation_example": ""
+    },
+    {
+      "key": "results",
+      "title": "5. Results",
+      "order": 9,
+      "purpose": "Report findings with tables, figures, and statistical tests.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Main results table", "Per-metric breakdown", "Ablation"],
+      "common_mistakes": ["No ablation", "Single-run reporting"],
+      "formatting_notes": "Use Tables 1, 2 etc. with captions above.",
+      "citation_example": ""
+    },
+    {
+      "key": "discussion",
+      "title": "6. Discussion",
+      "order": 10,
+      "purpose": "Interpret results in the context of prior work and theory.",
+      "word_limit": "600-900 words",
+      "what_to_include": ["Interpretation", "Comparison to prior work", "Implications", "Limitations"],
+      "common_mistakes": ["No comparison to prior work"],
+      "formatting_notes": "Anchor each paragraph to a specific finding.",
+      "citation_example": ""
+    },
+    {
+      "key": "conclusion",
+      "title": "7. Conclusions and Future Work",
+      "order": 11,
+      "purpose": "Wrap up and propose next steps.",
+      "word_limit": "250-400 words",
+      "what_to_include": ["Recap of contributions", "Key quantitative takeaway", "Concrete future directions"],
+      "common_mistakes": ["Restating the abstract"],
+      "formatting_notes": "Tight prose, no new citations unless essential.",
+      "citation_example": ""
+    },
+    {
+      "key": "acknowledgements",
+      "title": "Acknowledgements",
+      "order": 12,
+      "purpose": "Funding and contributor credits per Elsevier policy.",
+      "word_limit": "30-80 words",
+      "what_to_include": ["Funding info with grant IDs", "Non-author contributors"],
+      "common_mistakes": ["Listing co-authors here"],
+      "formatting_notes": "Unnumbered, between Conclusions and References.",
+      "citation_example": ""
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "order": 13,
+      "purpose": "All cited works in Elsevier (Harvard) name-year style.",
+      "word_limit": "unbounded",
+      "what_to_include": ["Author surnames", "Year", "Title", "Journal/venue", "Volume/pages/DOI"],
+      "common_mistakes": ["Inconsistent formatting", "Missing DOIs"],
+      "formatting_notes": "Surname, Initials., Year. Title. Journal Name, Volume(Issue), pp-pp.",
+      "citation_example": "Smith, J., Johnson, A., 2023. A title. Expert Syst. Appl. 213, 119123."
+    }
+  ]
+}
