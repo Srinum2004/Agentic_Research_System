@@ -1,20 +1,65 @@
 services:
+  kroki:
+    image: yuzutech/kroki:latest
+    container_name: ThesiqX-kroki
+    ports:
+      - "8001:8000"
+    environment:
+      KROKI_MAX_URI_LENGTH: "8000"
+      KROKI_MERMAID_HOST: "kroki-mermaid"
+      KROKI_MERMAID_PORT: "8002"
+    depends_on:
+      - kroki-mermaid
+    restart: always
+
+  # Mermaid runs in its own container because it needs a headless browser.
+  kroki-mermaid:
+    image: yuzutech/kroki-mermaid:latest
+    container_name: ThesiqX-kroki-mermaid
+    expose:
+      - "8002"
+    restart: always
+
+  minio:
+    image: minio/minio:latest
+    container_name: ThesiqX-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
   backend:
     build:
       context: ./backend
-    container_name: antigravity-backend
+    container_name: ThesiqX-backend
     ports:
       - "8000:8000"
     env_file:
       - ./backend/.env
     volumes:
       - ./backend:/app
+    depends_on:
+      minio:
+        condition: service_healthy
+      kroki:
+        condition: service_started
     restart: always
 
   frontend:
     build:
       context: ./frontend
-    container_name: antigravity-frontend
+    container_name: ThesiqX-frontend
     ports:
       - "5173:5173"
     environment:
@@ -25,3 +70,6 @@ services:
     depends_on:
       - backend
     restart: always
+
+volumes:
+  minio-data:

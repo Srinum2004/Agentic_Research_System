@@ -1,0 +1,134 @@
+{
+  "key": "acm_article",
+  "name": "ACM Article (sigconf)",
+  "description": "ACM article in the sigconf style — suitable for ACM conferences and journals (CHI, SIGCOMM, TOIS, etc.).",
+  "citation_style": "acm",
+  "paper_type": "experimental",
+  "default_journal_type": "ACM Conference / Journal",
+  "include_tables": true,
+  "include_figures": true,
+  "num_sections": 11,
+  "sections": [
+    {
+      "key": "title_page",
+      "title": "Title, Authors & CCS Concepts",
+      "order": 1,
+      "purpose": "ACM front matter — title, authors with affiliations, CCS concepts, and keywords.",
+      "word_limit": "60-120 words",
+      "what_to_include": ["Title", "Authors and affiliations", "ACM Reference Format placeholder", "CCS concepts list"],
+      "common_mistakes": ["Skipping CCS concepts", "Missing ACM Reference Format block"],
+      "formatting_notes": "Use ACM CCS taxonomy for concepts. Include the 'ACM Reference Format' block.",
+      "citation_example": ""
+    },
+    {
+      "key": "abstract",
+      "title": "Abstract",
+      "order": 2,
+      "purpose": "Self-contained summary describing problem, approach, contribution, and result.",
+      "word_limit": "150-200 words",
+      "what_to_include": ["Problem framing", "Approach", "Empirical result", "Significance"],
+      "common_mistakes": ["No quantitative result", "Vague claims"],
+      "formatting_notes": "Single paragraph, no citations.",
+      "citation_example": ""
+    },
+    {
+      "key": "keywords",
+      "title": "Author Keywords",
+      "order": 3,
+      "purpose": "Provide author-supplied keywords beyond CCS concepts.",
+      "word_limit": "5-8 terms",
+      "what_to_include": ["Method keywords", "Application keywords", "Domain keywords"],
+      "common_mistakes": ["Duplicating CCS concepts verbatim"],
+      "formatting_notes": "Comma-separated.",
+      "citation_example": ""
+    },
+    {
+      "key": "introduction",
+      "title": "1 Introduction",
+      "order": 4,
+      "purpose": "Motivate the problem and state the contribution.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Motivation", "Research question(s)", "Contributions (bulleted)", "Roadmap"],
+      "common_mistakes": ["No contribution list", "No roadmap"],
+      "formatting_notes": "Numbered section. End with a roadmap paragraph.",
+      "citation_example": "[1] A. Author. 2024. Title. In Proc. ACM Conf. X. https://doi.org/..."
+    },
+    {
+      "key": "background",
+      "title": "2 Background and Related Work",
+      "order": 5,
+      "purpose": "Survey the prior literature and position this work.",
+      "word_limit": "600-900 words",
+      "what_to_include": ["Conceptual background", "Thematic clusters of prior work", "Distinguishing this work"],
+      "common_mistakes": ["No synthesis", "Missing positioning"],
+      "formatting_notes": "Subsection per cluster.",
+      "citation_example": ""
+    },
+    {
+      "key": "methodology",
+      "title": "3 Method / System Design",
+      "order": 6,
+      "purpose": "Describe the system or method in implementation-grade detail.",
+      "word_limit": "800-1200 words",
+      "what_to_include": ["Architecture diagram", "Component-by-component description", "Design decisions"],
+      "common_mistakes": ["Hand-wavy architecture", "Missing rationale"],
+      "formatting_notes": "Use subsections 3.1, 3.2 etc. Reference figures explicitly.",
+      "citation_example": ""
+    },
+    {
+      "key": "evaluation",
+      "title": "4 Evaluation",
+      "order": 7,
+      "purpose": "Lay out the empirical study — datasets, baselines, metrics, and protocol.",
+      "word_limit": "500-800 words",
+      "what_to_include": ["Research questions revisited", "Datasets/participants", "Baselines/conditions", "Metrics", "Protocol"],
+      "common_mistakes": ["No RQ alignment", "Missing protocol detail"],
+      "formatting_notes": "Each RQ from the introduction must be answered here.",
+      "citation_example": ""
+    },
+    {
+      "key": "results",
+      "title": "5 Results",
+      "order": 8,
+      "purpose": "Report findings keyed to the research questions.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Per-RQ findings", "Tables and figures", "Statistical tests"],
+      "common_mistakes": ["Not tying back to RQs", "No effect-size reporting"],
+      "formatting_notes": "Use one subsection per RQ. Report effect sizes alongside p-values.",
+      "citation_example": ""
+    },
+    {
+      "key": "discussion",
+      "title": "6 Discussion",
+      "order": 9,
+      "purpose": "Interpret results, surface implications, and acknowledge threats to validity.",
+      "word_limit": "500-800 words",
+      "what_to_include": ["Implications for theory", "Implications for practice", "Threats to validity", "Limitations"],
+      "common_mistakes": ["Skipping threats to validity", "Overclaiming"],
+      "formatting_notes": "Use subsections for implications and limitations.",
+      "citation_example": ""
+    },
+    {
+      "key": "conclusion",
+      "title": "7 Conclusion and Future Work",
+      "order": 10,
+      "purpose": "Summarise and outline next steps.",
+      "word_limit": "200-300 words",
+      "what_to_include": ["Recap", "Open problems", "Future directions"],
+      "common_mistakes": ["Restating the abstract"],
+      "formatting_notes": "Short. No new claims.",
+      "citation_example": ""
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "order": 11,
+      "purpose": "List cited works in ACM Reference Format.",
+      "word_limit": "unbounded",
+      "what_to_include": ["Author. Year. Title. Venue.", "DOI if available"],
+      "common_mistakes": ["Missing DOIs", "Inconsistent capitalization"],
+      "formatting_notes": "ACM Reference Format: Author Surname, Initials. Year. Title. Venue. DOI.",
+      "citation_example": "[1] J. Doe. 2024. A Title. In Proc. ACM CHI '24. https://doi.org/10.1145/xxxxxxx.yyyyyyy"
+    }
+  ]
+}

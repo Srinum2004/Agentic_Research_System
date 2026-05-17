@@ -1,0 +1,145 @@
+{
+  "key": "ieee_conference",
+  "name": "IEEE Conference Paper",
+  "description": "Standard IEEE two-column conference paper. Strong fit for engineering, CS, and applied-AI submissions.",
+  "citation_style": "ieee",
+  "paper_type": "experimental",
+  "default_journal_type": "IEEE Conference / Transactions",
+  "include_tables": true,
+  "include_figures": true,
+  "num_sections": 12,
+  "sections": [
+    {
+      "key": "title_page",
+      "title": "Title, Authors & Affiliations",
+      "order": 1,
+      "purpose": "Identify the paper, all authors, and their affiliations per IEEE front-matter conventions.",
+      "word_limit": "30-60 words",
+      "what_to_include": ["Paper title", "Author names in submission order", "Affiliations and emails", "Corresponding author"],
+      "common_mistakes": ["Omitting affiliations", "Using non-standard author ordering"],
+      "formatting_notes": "Single-line title in Title Case; authors centered below; affiliations on the next line.",
+      "citation_example": ""
+    },
+    {
+      "key": "abstract",
+      "title": "Abstract",
+      "order": 2,
+      "purpose": "One-paragraph summary covering problem, method, results, and contribution.",
+      "word_limit": "150-250 words",
+      "what_to_include": ["Problem context", "Proposed approach", "Headline result with metric", "Key contribution"],
+      "common_mistakes": ["Vague claims with no numbers", "Citing references inside the abstract"],
+      "formatting_notes": "Single paragraph, no citations, no acronyms before definition.",
+      "citation_example": ""
+    },
+    {
+      "key": "keywords",
+      "title": "Index Terms",
+      "order": 3,
+      "purpose": "Provide IEEE index terms for discoverability.",
+      "word_limit": "5-8 terms",
+      "what_to_include": ["Domain keywords", "Method keywords", "Application keywords"],
+      "common_mistakes": ["Listing acronyms only", "Reusing the title verbatim"],
+      "formatting_notes": "Comma-separated list, lowercase except proper nouns.",
+      "citation_example": ""
+    },
+    {
+      "key": "introduction",
+      "title": "I. Introduction",
+      "order": 4,
+      "purpose": "Establish problem importance, gap in prior work, and contributions of this paper.",
+      "word_limit": "600-900 words",
+      "what_to_include": ["Motivation", "Problem statement", "Brief prior-art summary", "Explicit list of contributions", "Paper organization"],
+      "common_mistakes": ["No contribution list", "Mixing methodology into the introduction"],
+      "formatting_notes": "Use Roman numeral section heading. End with a 'The remainder of this paper is organized as follows' paragraph.",
+      "citation_example": "[1] A. Author, \"Title,\" IEEE Trans. X, vol. 12, no. 3, pp. 1-9, 2024."
+    },
+    {
+      "key": "related_work",
+      "title": "II. Related Work",
+      "order": 5,
+      "purpose": "Position the work against the prior literature; identify the gap addressed.",
+      "word_limit": "500-800 words",
+      "what_to_include": ["Thematic grouping of prior approaches", "Strengths and limitations of each thread", "Explicit gap statement"],
+      "common_mistakes": ["Listing papers without synthesis", "No comparison to this work"],
+      "formatting_notes": "Group references by theme; do not list chronologically.",
+      "citation_example": "[2] B. Author and C. Author, \"...,\" Proc. IEEE Conf. Y, pp. 10-18, 2023."
+    },
+    {
+      "key": "methodology",
+      "title": "III. Proposed Method",
+      "order": 6,
+      "purpose": "Describe the proposed approach in enough detail that a competent reader can re-implement it.",
+      "word_limit": "800-1200 words",
+      "what_to_include": ["System overview diagram", "Formal problem definition", "Algorithm or pipeline steps", "Design choices and rationale"],
+      "common_mistakes": ["Skipping equations", "Mixing results into methodology"],
+      "formatting_notes": "Use subsections (A, B, C). Define every variable on first use. Reference figures and tables explicitly.",
+      "citation_example": ""
+    },
+    {
+      "key": "experimental_setup",
+      "title": "IV. Experimental Setup",
+      "order": 7,
+      "purpose": "Document datasets, baselines, hyperparameters, and evaluation metrics for reproducibility.",
+      "word_limit": "400-700 words",
+      "what_to_include": ["Dataset description", "Baselines and their settings", "Hyperparameters", "Evaluation metrics", "Hardware"],
+      "common_mistakes": ["Missing hyperparameters", "Unclear metric definitions"],
+      "formatting_notes": "Use a comparison table for baselines; cite each dataset source.",
+      "citation_example": ""
+    },
+    {
+      "key": "results",
+      "title": "V. Results and Discussion",
+      "order": 8,
+      "purpose": "Present experimental findings, statistical significance, and interpretive discussion.",
+      "word_limit": "700-1000 words",
+      "what_to_include": ["Main result table", "Ablation study", "Qualitative examples", "Failure modes", "Discussion of why the method works"],
+      "common_mistakes": ["Reporting only headline number", "No ablation", "No error analysis"],
+      "formatting_notes": "Place results table near top of section; refer to it as 'Table I'. Use bold for best values.",
+      "citation_example": ""
+    },
+    {
+      "key": "comparison",
+      "title": "VI. Comparative Analysis",
+      "order": 9,
+      "purpose": "Side-by-side comparison against state-of-the-art baselines on shared benchmarks.",
+      "word_limit": "300-500 words",
+      "what_to_include": ["Comparison table", "Per-metric commentary", "Statistical test (if applicable)"],
+      "common_mistakes": ["Cherry-picking metrics", "Not reporting standard deviations"],
+      "formatting_notes": "Table II should list all baselines with same columns as Table I.",
+      "citation_example": ""
+    },
+    {
+      "key": "conclusion",
+      "title": "VII. Conclusion",
+      "order": 10,
+      "purpose": "Restate the contribution, summarize key results, and outline future work.",
+      "word_limit": "200-300 words",
+      "what_to_include": ["Recap of contributions", "Quantitative takeaway", "Limitations", "Two or three concrete future directions"],
+      "common_mistakes": ["Repeating the abstract verbatim", "Introducing new claims"],
+      "formatting_notes": "Single subsection. No citations except when essential.",
+      "citation_example": ""
+    },
+    {
+      "key": "acknowledgements",
+      "title": "Acknowledgements",
+      "order": 11,
+      "purpose": "Credit funding bodies and non-author contributors.",
+      "word_limit": "30-80 words",
+      "what_to_include": ["Funding grant numbers", "Computational resources", "Reviewers (if applicable)"],
+      "common_mistakes": ["Listing co-authors here"],
+      "formatting_notes": "Unnumbered section between conclusion and references.",
+      "citation_example": ""
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "order": 12,
+      "purpose": "List all cited works in IEEE numeric style, matching the inline markers used throughout.",
+      "word_limit": "unbounded",
+      "what_to_include": ["Numbered references", "Author initials before surname", "Italicized journal/conference names"],
+      "common_mistakes": ["Mixing citation styles", "Missing volume/page numbers"],
+      "formatting_notes": "Use IEEE bracket style: [1] J. Doe, \"Title,\" Journal Name, vol. X, no. Y, pp. nn-nn, year.",
+      "citation_example": "[1] J. Doe, \"A Title,\" IEEE Trans. X, vol. 12, no. 3, pp. 1-9, Mar. 2024."
+    }
+  ]
+}

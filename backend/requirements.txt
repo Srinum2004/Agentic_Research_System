@@ -8,3 +8,25 @@ groq
 python-dotenv
 python-multipart
 requests
+
+# Paper Studio — LangGraph agent stack
+langchain
+langchain-core
+langchain-groq
+langchain-community
+langgraph
+tavily-python
+
+# Object storage
+minio
+
+# Export formats
+python-docx
+markdown
+weasyprint
+
+# Uploaded paper parsing (PDF text extraction for /verify-upload)
+pypdf
+
+# Streaming
+sse-starlette

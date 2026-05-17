@@ -138,7 +138,7 @@ export default function Settings() {
                         transition={{ delay: 0.2 }}
                         className="card"
                     >
-                        <h3 className="settings-section-title"><Shield size={20} /> Usage Quota</h3>
+                        <h3 className="settings-section-title"><Shield size={20} /> Research Search Quota</h3>
                         <div className="usage-stats">
                             <div className="usage-circle">
                                 <span className="usage-number">{profile.search_used}</span>
@@ -146,6 +146,10 @@ export default function Settings() {
                             </div>
                             <p style={{ textAlign: 'center', margin: '1.5rem 0', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                                 You have used <strong>{(profile.search_used / profile.search_limit * 100).toFixed(0)}%</strong> of your monthly search capacity.
+                            </p>
+                            <p style={{ textAlign: 'center', margin: '0 0 1rem 0', color: 'var(--text-dim)', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                                Counts <strong>New Research</strong> queries (web &amp; literature search) only.
+                                <br />Paper Studio drafting is a separate product and is not billed against this quota.
                             </p>
 
                             {profile.role === 'user' && (
@@ -192,7 +196,7 @@ export default function Settings() {
                                     className="auth-card modal-content"
                                 >
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                                        <h2 style={{ margin: 0 }}>Request Limit Increase</h2>
+                                        <h2 style={{ margin: 0 }}>Request Research Search Limit Increase</h2>
                                         <button onClick={() => setShowRequestModal(false)} className="btn-text" style={{ fontSize: '1.5rem' }}>×</button>
                                     </div>
                                     <form onSubmit={handleRequestLimit}>

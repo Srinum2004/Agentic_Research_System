@@ -72,7 +72,7 @@ export default function Dashboard() {
 
                     <div className="usage-meter card" style={{ padding: '1rem 1.5rem', marginBottom: 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="stat-label" style={{ fontSize: '0.7rem' }}>Search Credits</span>
+                            <span className="stat-label" style={{ fontSize: '0.7rem' }}>Research Search Credits</span>
                             <span className="usage-meter-text">{profile.search_used} / {profile.search_limit}</span>
                         </div>
                         <div className="usage-meter-progress">
@@ -83,6 +83,9 @@ export default function Dashboard() {
                                 className="usage-meter-bar"
                             />
                         </div>
+                        <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.7rem', color: 'var(--text-dim)' }}>
+                            For web &amp; literature search only — Paper Studio is independent.
+                        </p>
                     </div>
                 </motion.header>
 

@@ -44,3 +44,7 @@ docker-compose.override.yml
 # OS
 .DS_Store
 Thumbs.db
+# 1. Add Claude config to .gitignore
+echo "" >> .gitignore
+echo "# Claude Code local config" >> .gitignore
+echo ".claude/" >> .gitignore
