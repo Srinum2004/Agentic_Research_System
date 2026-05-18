@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import api from './api';
-import { Mail, Lock, Key, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Mail, Key, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
 import AuthLayout from './AuthLayout';
+import PasswordInput from './PasswordInput';
 
 export default function ForgotPassword() {
     const [step, setStep] = useState(1);
@@ -129,19 +130,15 @@ export default function ForgotPassword() {
 
                     <div className="input-group">
                         <label className="input-label" htmlFor="newPassword">New password</label>
-                        <div className="input-with-icon">
-                            <Lock size={18} />
-                            <input
-                                id="newPassword"
-                                type="password"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                placeholder="At least 8 characters"
-                                autoComplete="new-password"
-                                required
-                                minLength={8}
-                            />
-                        </div>
+                        <PasswordInput
+                            id="newPassword"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="At least 8 characters"
+                            autoComplete="new-password"
+                            required
+                            minLength={8}
+                        />
                     </div>
 
                     <button

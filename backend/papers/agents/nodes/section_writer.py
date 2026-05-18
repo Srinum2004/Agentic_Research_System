@@ -15,6 +15,35 @@ from ..state import PaperState
 from .research import research
 
 
+def _author_hint_from_state(state: PaperState) -> str:
+    """Build the AUTHOR HINT block from whatever identity info the request
+    carries. The signed-in user's email is all the User model stores today,
+    so we derive a display name from the local-part and let the user fill
+    the rest in via chat — better than letting the LLM invent a name.
+    """
+    email = (state.get("user_email") or "").strip()
+    display_name = (state.get("user_display_name") or "").strip()
+    if not email and not display_name:
+        return (
+            "No author identity available from the signed-in account. Use "
+            "the bracketed placeholders [Author Name], [Email], [Department], "
+            "[Institution] and let the user fill them in via chat."
+        )
+    parts = []
+    if display_name:
+        parts.append(f"Author name: {display_name}")
+    if email:
+        parts.append(f"Email: {email}")
+        parts.append(f"Corresponding author email: {email}")
+    parts.append("Department: [Department]")
+    parts.append("Institution: [Institution]")
+    parts.append(
+        "Use the values above verbatim. Keep bracketed fields as visible "
+        "placeholders — the user will replace them via chat."
+    )
+    return "\n".join(parts)
+
+
 def _build_prompt(state: PaperState) -> str:
     guidance: dict[str, Any] = state.get("section_guidance", {}) or {}
     section_title = state.get("section_title") or "Section"
@@ -31,6 +60,7 @@ def _build_prompt(state: PaperState) -> str:
         word_limit=guidance.get("word_limit", ""),
         what_to_include="; ".join(guidance.get("what_to_include", []) or []),
         common_mistakes="; ".join(guidance.get("common_mistakes", []) or []),
+        author_hint=_author_hint_from_state(state),
         research_context=context[:6000],
         include_tables="Yes" if state.get("include_tables") else "No",
         include_figures="Yes" if state.get("include_figures") else "No",

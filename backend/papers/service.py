@@ -6,8 +6,19 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from db import PaperMessage, PaperProject, PaperSection
+from db import PaperMessage, PaperProject, PaperSection, User
 from .schemas import MessageOut, ProjectDetail, ProjectMeta, SectionOut
+
+
+def display_name_from_email(email: str | None) -> str:
+    """Turn "first.last@x.com" → "First Last". The User model only stores an
+    email today; this is the best identity we can show on a title page
+    without making the LLM invent one."""
+    if not email:
+        return ""
+    local = email.split("@", 1)[0]
+    parts = [p for p in local.replace("_", ".").replace("-", ".").split(".") if p]
+    return " ".join(p.capitalize() for p in parts)
 
 
 def project_meta(project: PaperProject) -> ProjectMeta:
@@ -95,12 +106,14 @@ def chat_history_for_graph(db: Session, project_id: int, limit: int = 24) -> lis
     return [{"role": r.role, "content": r.content} for r in rows]
 
 
-def load_state_from_project(project: PaperProject) -> dict[str, Any]:
+def load_state_from_project(
+    project: PaperProject, user: User | None = None
+) -> dict[str, Any]:
     try:
         template = json.loads(project.template_json) if project.template_json else []
     except (TypeError, ValueError):
         template = []
-    return {
+    state: dict[str, Any] = {
         "project_id": project.id,
         "topic": project.topic or None,
         "domain": project.domain or None,
@@ -115,6 +128,10 @@ def load_state_from_project(project: PaperProject) -> dict[str, Any]:
         "title": project.title or None,
         "template": template,
     }
+    if user is not None:
+        state["user_email"] = user.email or ""
+        state["user_display_name"] = display_name_from_email(user.email)
+    return state
 
 
 def persist_intake_fields(project: PaperProject, state: dict[str, Any]) -> None:

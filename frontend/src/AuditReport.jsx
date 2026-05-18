@@ -284,11 +284,6 @@ export default function AuditReport({
                     <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <ShieldCheck size={18} /> Research Paper Audit
                     </h2>
-                    {report && (
-                        <div className={`audit-decision-badge ${decisionMeta.className}`}>
-                            <decisionMeta.icon size={16} /> {decisionMeta.label}
-                        </div>
-                    )}
                     {report && onRerun && (
                         <button
                             type="button"

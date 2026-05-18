@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import api from './api';
-import { Lock, Key, AlertCircle, CheckCircle } from 'lucide-react';
+import { Key, AlertCircle, CheckCircle } from 'lucide-react';
 import AuthLayout from './AuthLayout';
+import PasswordInput from './PasswordInput';
 
 export default function AcceptInvite() {
     const [inviteCode, setInviteCode] = useState('');
@@ -89,19 +90,15 @@ export default function AcceptInvite() {
 
                 <div className="input-group">
                     <label className="input-label" htmlFor="password">Set your password</label>
-                    <div className="input-with-icon">
-                        <Lock size={18} />
-                        <input
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="At least 8 characters"
-                            autoComplete="new-password"
-                            required
-                            minLength={8}
-                        />
-                    </div>
+                    <PasswordInput
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="At least 8 characters"
+                        autoComplete="new-password"
+                        required
+                        minLength={8}
+                    />
                 </div>
 
                 <button

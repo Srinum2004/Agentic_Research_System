@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from './api';
-import { Mail, Lock, Shield, Key, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Mail, Shield, Key, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 import AuthLayout from './AuthLayout';
+import PasswordInput from './PasswordInput';
 
 export default function Signup() {
     const [step, setStep] = useState(1);
@@ -121,19 +122,15 @@ export default function Signup() {
 
                     <div className="input-group">
                         <label className="input-label" htmlFor="password">Create password</label>
-                        <div className="input-with-icon">
-                            <Lock size={18} />
-                            <input
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="At least 8 characters"
-                                autoComplete="new-password"
-                                required
-                                minLength={8}
-                            />
-                        </div>
+                        <PasswordInput
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="At least 8 characters"
+                            autoComplete="new-password"
+                            required
+                            minLength={8}
+                        />
                     </div>
 
                     <div className="input-group">
@@ -157,17 +154,15 @@ export default function Signup() {
                                 style={{ overflow: 'hidden' }}
                             >
                                 <label className="input-label" htmlFor="adminSecret">Admin secret</label>
-                                <div className="input-with-icon">
-                                    <Key size={18} />
-                                    <input
-                                        id="adminSecret"
-                                        type="password"
-                                        value={adminSecret}
-                                        onChange={(e) => setAdminSecret(e.target.value)}
-                                        placeholder="Admin secret key"
-                                        required={role === 'admin'}
-                                    />
-                                </div>
+                                <PasswordInput
+                                    id="adminSecret"
+                                    value={adminSecret}
+                                    onChange={(e) => setAdminSecret(e.target.value)}
+                                    placeholder="Admin secret key"
+                                    autoComplete="off"
+                                    required={role === 'admin'}
+                                    leadingIcon={Key}
+                                />
                             </motion.div>
                         )}
                     </AnimatePresence>
