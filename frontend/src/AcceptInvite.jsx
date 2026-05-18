@@ -25,7 +25,10 @@ export default function AcceptInvite() {
             localStorage.setItem('token', res.data.access_token);
             localStorage.setItem('role', res.data.role);
             setSuccess(true);
-            setTimeout(() => navigate('/dashboard'), 1800);
+            // Route by role so invited admins land on the admin dashboard,
+            // not the user-facing one. Matches Login.jsx's redirect.
+            const landing = res.data.role === 'admin' ? '/admin/dashboard' : '/dashboard';
+            setTimeout(() => navigate(landing), 1800);
         } catch (err) {
             setError(err.response?.data?.detail || 'Invalid invitation code or setup failed');
         } finally {

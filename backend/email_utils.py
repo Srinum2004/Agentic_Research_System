@@ -43,10 +43,10 @@ def send_email(subject, recipient, body_html):
         return False
 
 def send_verification_email(email, code):
-    subject = "Antigravity - Your Verification Code"
+    subject = "ThesiqX - Your Verification Code"
     body = f"""
     <div style="font-family: 'Outfit', sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-        <h2 style="color: #6366f1;">Antigravity Account Verification</h2>
+        <h2 style="color: #6366f1;">ThesiqX Account Verification</h2>
         <p>You requested an account verification code. Please use the code below to complete your registration:</p>
         <div style="background: #f4f4f5; padding: 20px; text-align: center; border-radius: 8px;">
             <span style="font-size: 32px; font-weight: 800; letter-spacing: 5px; color: #0f121a;">{code}</span>
@@ -57,13 +57,13 @@ def send_verification_email(email, code):
     return send_email(subject, email, body)
 
 def send_invitation_email(email, invite_code):
-    subject = "Antigravity - WorkSpace Invitation"
+    subject = "ThesiqX - WorkSpace Invitation"
     # Note: In a real app, this would be a URL like http://localhost:5173/invite?code=...
     # For now, we'll tell them to use the code.
     body = f"""
     <div style="font-family: 'Outfit', sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-        <h2 style="color: #6366f1;">Welcome to Antigravity</h2>
-        <p>An administrator has invited you to join the Antigravity research platform.</p>
+        <h2 style="color: #6366f1;">Welcome to ThesiqX</h2>
+        <p>An administrator has invited you to join the ThesiqX research platform.</p>
         <p>To join, please visit the activation link below and enter your invitation code:</p>
         <div style="margin: 30px 0; text-align: center;">
             <a href="http://localhost:5173/invite" style="background: #6366f1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">Activate Account</a>
@@ -75,7 +75,7 @@ def send_invitation_email(email, invite_code):
     return send_email(subject, email, body)
 
 def send_password_reset_email(email, code):
-    subject = "Antigravity - Password Reset Code"
+    subject = "ThesiqX - Password Reset Code"
     body = f"""
     <div style="font-family: 'Outfit', sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
         <h2 style="color: #6366f1;">Password Reset Request</h2>
