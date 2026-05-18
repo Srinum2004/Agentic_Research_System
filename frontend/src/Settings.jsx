@@ -220,16 +220,6 @@ export default function Settings() {
                                                 value={requestReason}
                                                 onChange={e => setRequestReason(e.target.value)}
                                                 placeholder="Please explain why you need a higher search volume..."
-                                                style={{
-                                                    width: '100%',
-                                                    padding: '1rem',
-                                                    borderRadius: '12px',
-                                                    background: 'rgba(255,255,255,0.03)',
-                                                    border: '1px solid var(--border-color)',
-                                                    color: 'white',
-                                                    minHeight: '120px',
-                                                    fontFamily: 'inherit'
-                                                }}
                                                 required
                                             />
                                         </div>

@@ -12,6 +12,28 @@ const STATUS_LABEL = {
     done: 'Exported',
 };
 
+const MONTHS = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+// Render dates like "18ᵗʰ May 2026" with a Unicode superscript ordinal.
+// 11/12/13 are the exceptions to the st/nd/rd rule.
+function formatOrdinalDate(isoLike) {
+    const d = new Date(isoLike);
+    if (Number.isNaN(d.getTime())) return '';
+    const day = d.getDate();
+    const tens = day % 100;
+    const ones = day % 10;
+    let suffix = 'ᵗʰ';
+    if (tens < 11 || tens > 13) {
+        if (ones === 1) suffix = 'ˢᵗ';
+        else if (ones === 2) suffix = 'ⁿᵈ';
+        else if (ones === 3) suffix = 'ʳᵈ';
+    }
+    return `${day}${suffix} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+
 export default function PapersList() {
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
@@ -123,7 +145,7 @@ export default function PapersList() {
                                 </p>
                                 <div className="paper-card-foot">
                                     <span className="text-muted" style={{ fontSize: '0.75rem' }}>
-                                        Updated {new Date(p.updated_at).toLocaleDateString()}
+                                        Updated {formatOrdinalDate(p.updated_at)}
                                     </span>
                                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                                         <button

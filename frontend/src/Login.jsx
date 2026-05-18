@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import api from './api';
-import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
+import { Mail, LogIn, AlertCircle } from 'lucide-react';
 import AuthLayout from './AuthLayout';
+import PasswordInput from './PasswordInput';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -66,18 +67,14 @@ export default function Login() {
                         <label className="input-label" htmlFor="password">Password</label>
                         <Link to="/forgot-password" className="forgot-link">Forgot password?</Link>
                     </div>
-                    <div className="input-with-icon">
-                        <Lock size={18} />
-                        <input
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            autoComplete="current-password"
-                            required
-                        />
-                    </div>
+                    <PasswordInput
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        autoComplete="current-password"
+                        required
+                    />
                 </div>
 
                 <button

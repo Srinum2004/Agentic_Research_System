@@ -480,6 +480,29 @@ a:hover {
   transition: background-color 9999s ease-in-out 0s;
 }
 
+.password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+  border-radius: 6px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.password-toggle:hover { color: var(--text-color); background: var(--surface-hover); }
+.password-toggle:focus-visible {
+  outline: none;
+  color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-soft);
+}
+
 .btn {
   padding: 0 1.5rem;
   height: 48px;
@@ -1240,6 +1263,42 @@ a:hover {
   padding: 2rem;
 }
 
+/* Theme-aware form controls inside any modal — avoids inline `color: white`
+   leaking onto light theme and bare <input> falling back to browser default. */
+.modal-content input[type="number"],
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+}
+.modal-content input[type="number"]:focus,
+.modal-content input[type="text"]:focus,
+.modal-content input[type="email"]:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  border-color: var(--primary-color);
+  background: var(--input-bg-focus);
+  box-shadow: 0 0 0 4px var(--primary-soft);
+}
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: var(--text-dim);
+}
+.modal-content textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 .modal-content.report-modal {
   max-width: 1000px;
   max-height: 90vh;
@@ -1424,13 +1483,34 @@ a:hover {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 .audit-header {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
+  padding-right: 3.25rem; /* room so action buttons never run under the × */
+}
+.audit-header > h2 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.audit-header > .audit-rerun-btn,
+.audit-header > .audit-export-btn {
+  flex-shrink: 0;
+}
+
+/* Close × — anchored to the modal card's top-right corner so it sits in
+   the corner instead of jamming the title row. Inline mode keeps the
+   close button inside the sticky header row (its rules are below). */
+.audit-modal > .audit-header > .close-btn {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  margin: 0;
+  z-index: 2;
 }
 
 .audit-body {
@@ -2115,7 +2195,9 @@ a:hover {
 .paper-canvas-main {
   display: flex;
   flex-direction: column;
-  padding-bottom: 0;
+  padding: 1.75rem 1.75rem 0;
+  max-width: none;
+  margin: 0;
   height: 100vh;
 }
 .paper-canvas-head {
@@ -2153,8 +2235,8 @@ a:hover {
 .paper-canvas-split {
   flex: 1;
   display: grid;
-  grid-template-columns: minmax(280px, 35%) minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: minmax(360px, 38%) minmax(0, 1fr);
+  gap: 1.25rem;
   padding-top: 1rem;
   min-height: 0;
 }

@@ -140,6 +140,11 @@ WORD LIMIT: {word_limit}
 WHAT TO INCLUDE: {what_to_include}
 COMMON MISTAKES TO AVOID: {common_mistakes}
 
+AUTHOR HINT (use ONLY when this section is a title page / author block /
+acknowledgements / cover — i.e. anything that names the author. Ignore for
+every other section):
+{author_hint}
+
 Research context (web search results — synthesise and cite, do not copy):
 ---
 {research_context}
@@ -171,6 +176,13 @@ OUTPUT RULES — follow strictly:
 10. When include_figures is "Yes" and a diagram clarifies the idea, emit a
     ```mermaid``` fenced code block. Keep node labels short.
 11. Write so a reader cannot tell whether a human or an LLM produced it.
+12. NEVER fabricate author names, affiliations, departments, or institutions.
+    For title pages and any author-identifying block, use ONLY the AUTHOR
+    HINT above. For any field the hint does not supply (e.g. department,
+    institution, ORCID, corresponding-author postal address), insert a
+    clearly bracketed placeholder like "[Department]", "[Institution]",
+    "[ORCID]" — never invent a plausible-looking value. The user will fill
+    these in via chat.
 
 include_tables: {include_tables}
 include_figures: {include_figures}

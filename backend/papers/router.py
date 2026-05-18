@@ -195,7 +195,7 @@ def chat(
 
     _save_message(db, project, role="user", content=body.message, phase=phase)
 
-    state = load_state_from_project(project)
+    state = load_state_from_project(project, current_user)
     state.update(
         {
             "phase": phase,
@@ -300,7 +300,7 @@ def generate_template(
     project = _get_project(db, current_user, project_id)
     if not project.intent_complete:
         raise HTTPException(status_code=400, detail="Intake not complete yet")
-    state = load_state_from_project(project)
+    state = load_state_from_project(project, current_user)
     state["phase"] = "template"
     out = template_node(state)
     _materialize_template(db, project, out.get("template") or [])
@@ -340,7 +340,7 @@ def draft_section(
     except (TypeError, ValueError):
         guidance = {}
 
-    state = load_state_from_project(project)
+    state = load_state_from_project(project, current_user)
     state.update(
         {
             "phase": "draft",
@@ -387,7 +387,7 @@ def stream_section_endpoint(
     except (TypeError, ValueError):
         guidance = {}
 
-    state = load_state_from_project(project)
+    state = load_state_from_project(project, current_user)
     state.update(
         {
             "phase": "draft",

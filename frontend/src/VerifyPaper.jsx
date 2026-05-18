@@ -40,8 +40,8 @@ export default function VerifyPaper() {
         setErrorMessage('');
         if (!f) return;
         const name = (f.name || '').toLowerCase();
-        if (!name.endsWith('.pdf') && !name.endsWith('.docx')) {
-            setErrorMessage('Only PDF or DOCX files are supported.');
+        if (!name.endsWith('.pdf')) {
+            setErrorMessage('Only PDF files are supported.');
             return;
         }
         if (f.size > MAX_BYTES) {
@@ -161,7 +161,7 @@ export default function VerifyPaper() {
 
                     <div>
                         <label className="form-label" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
-                            2. Upload paper (PDF or DOCX, max 15 MB)
+                            2. Upload paper (PDF only, max 15 MB)
                         </label>
                         <div
                             onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -182,7 +182,7 @@ export default function VerifyPaper() {
                             <input
                                 ref={fileInputRef}
                                 type="file"
-                                accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                accept=".pdf,application/pdf"
                                 onChange={(e) => pickFile(e.target.files?.[0])}
                                 style={{ display: 'none' }}
                                 disabled={busy}
@@ -212,7 +212,7 @@ export default function VerifyPaper() {
                                     <UploadCloud size={28} style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }} />
                                     <div style={{ fontSize: '0.9rem' }}>Drag &amp; drop your paper here, or click to browse</div>
                                     <div className="text-muted" style={{ fontSize: '0.75rem', marginTop: '0.25rem' }}>
-                                        PDF or DOCX · up to 15 MB
+                                        PDF only · up to 15 MB
                                     </div>
                                 </>
                             )}

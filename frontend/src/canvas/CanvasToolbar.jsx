@@ -104,7 +104,8 @@ export default function CanvasToolbar({
                         <button
                             className="btn btn-secondary"
                             onClick={onUploadFigure}
-                            title="Upload figure"
+                            title="Figure uploads are temporarily disabled"
+                            disabled
                         >
                             <ImageIcon size={14} /> Figure
                         </button>
