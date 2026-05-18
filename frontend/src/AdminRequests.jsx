@@ -95,7 +95,12 @@ export default function AdminRequests() {
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                                     <span className="text-dim">{req.current_limit}</span>
                                                     <Zap size={12} className="text-primary" />
-                                                    <span style={{ fontWeight: 700, color: 'var(--primary-color)' }}>{req.requested_limit}</span>
+                                                    <span style={{ fontWeight: 700, color: 'var(--primary-color)' }}>
+                                                        {(req.current_limit || 0) + (req.requested_limit || 0)}
+                                                    </span>
+                                                    <span className="text-dim" style={{ fontSize: '0.75rem' }}>
+                                                        (+{req.requested_limit})
+                                                    </span>
                                                 </div>
                                             ) : (
                                                 <div style={{ maxWidth: 200, fontSize: '0.85rem', color: 'var(--text-muted)' }}>

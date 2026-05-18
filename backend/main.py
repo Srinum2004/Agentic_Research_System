@@ -351,7 +351,11 @@ async def request_limit(
     type_display = "Limit Increase" if request_data.request_type == "limit" else "Password Reset"
     msg = f"User {current_user.email} requested {type_display}."
     if request_data.requested_limit:
-        msg += f" (New Limit: {request_data.requested_limit})"
+        # requested_limit is the increment ("+5"), not the new total.
+        msg += (
+            f" (+{request_data.requested_limit} credits → "
+            f"would become {current_user.search_limit + request_data.requested_limit})"
+        )
     msg += f" Reason: {request_data.reason}"
 
     admin_notif = Notification(
@@ -485,6 +489,11 @@ def update_user_status(user_id: int, status_update: UserUpdate, admin: User = De
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    # Block self-disable. Without this an admin can lock themselves out by
+    # toggling their own row in the User Management table — the only way
+    # back is a direct DB write.
+    if user.id == admin.id and status_update.is_active is False:
+        raise HTTPException(status_code=400, detail="You cannot disable your own admin account")
     if status_update.is_active is not None:
         user.is_active = status_update.is_active
     db.commit()
@@ -562,15 +571,26 @@ def handle_request(
     req.status = handle_data.status
     user = db.query(User).filter(User.id == req.user_id).first()
     
+    # `requested_limit` is the *additional* credits the user asked for, not
+    # the new total. Add it to the current limit so an approve of "+5" on a
+    # user at 10 results in 15, never an overwrite to 5.
+    new_total = None
     if handle_data.status == "approved" and user and req.request_type == "limit":
-        user.search_limit = req.requested_limit
-        
+        added = int(req.requested_limit or 0)
+        if added > 0:
+            user.search_limit = (user.search_limit or 0) + added
+            new_total = user.search_limit
+
     # Notify user
     type_name = "Limit Request" if req.request_type == "limit" else "Password Reset Request"
+    if new_total is not None:
+        user_msg = f"Your {type_name.lower()} has been approved. New search limit: {new_total}."
+    else:
+        user_msg = f"Your {type_name.lower()} has been {handle_data.status}."
     notif = Notification(
         user_id=req.user_id,
         title=f"{type_name} {handle_data.status.capitalize()}",
-        message=f"Your {type_name.lower()} has been {handle_data.status}.",
+        message=user_msg,
         type="success" if handle_data.status == "approved" else "warning"
     )
     db.add(notif)

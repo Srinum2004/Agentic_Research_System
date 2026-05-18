@@ -201,14 +201,18 @@ export default function Settings() {
                                     </div>
                                     <form onSubmit={handleRequestLimit}>
                                         <div className="input-group">
-                                            <label className="input-label">Requested Limit</label>
+                                            <label className="input-label">Additional credits</label>
                                             <input
                                                 type="number"
+                                                min="1"
                                                 value={requestedLimit}
                                                 onChange={e => setRequestedLimit(e.target.value)}
-                                                placeholder="e.g. 100"
+                                                placeholder="e.g. 5"
                                                 required
                                             />
+                                            <div className="text-muted" style={{ fontSize: '0.75rem', marginTop: '0.35rem' }}>
+                                                Added to your current limit on approval (current: <strong>{profile.search_limit}</strong>).
+                                            </div>
                                         </div>
                                         <div className="input-group">
                                             <label className="input-label">Reason / Use Case</label>

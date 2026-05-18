@@ -215,7 +215,6 @@ export default function AuditReport({
         for (const s of sections || []) map[s.key] = s.title;
         return map;
     }, [sections]);
-    if (!open) return null;
 
     const report = audit?.report;
     const decisionMeta = report ? DECISION_STYLE[report.decision] || DECISION_STYLE.major_revision : null;
@@ -276,6 +275,8 @@ export default function AuditReport({
             ].filter(Boolean),
         };
     }, [report]);
+
+    if (!open) return null;
 
     const inner = (
         <>
@@ -377,8 +378,6 @@ export default function AuditReport({
                                         </p>
                                         <div className="audit-improvements">
                                             {report.improvements.map((imp, i) => {
-                                                const impKey = `${imp.section_key || 'paper'}::${i}`;
-                                                const isApplying = applyingKey === impKey;
                                                 const sectionLabel = imp.section_key
                                                     ? (sectionTitleByKey[imp.section_key] || imp.section_key)
                                                     : null;
@@ -404,21 +403,6 @@ export default function AuditReport({
                                                         <div className="audit-improvement-detail audit-improvement-action">
                                                             <strong>Suggested action:</strong> {imp.suggested_instruction}
                                                         </div>
-                                                    )}
-                                                    {!readOnly && onApplyImprovement && imp.suggested_instruction && (
-                                                        <button
-                                                            className="btn btn-secondary audit-apply-btn"
-                                                            onClick={() => onApplyImprovement(imp, impKey)}
-                                                            disabled={isApplying}
-                                                        >
-                                                            {isApplying ? (
-                                                                <>
-                                                                    <Loader2 size={12} className="spin" /> Applying…
-                                                                </>
-                                                            ) : (
-                                                                <>Apply this fix →</>
-                                                            )}
-                                                        </button>
                                                     )}
                                                 </div>
                                                 );

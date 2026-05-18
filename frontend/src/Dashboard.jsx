@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import api from './api';
 import Sidebar from './Sidebar';
 import AgentActivity from './AgentActivity';
+import MarkdownView from './canvas/MarkdownView';
 import { Search, Sparkles, AlertCircle, Cpu, Zap, Timer, Globe } from 'lucide-react';
 
 export default function Dashboard() {
@@ -166,8 +167,8 @@ export default function Dashboard() {
                                         {result.used_web_search && <span className="meta-item web"><Globe size={14} style={{ marginRight: 4 }} /> Web Search Used</span>}
                                     </div>
                                 </div>
-                                <div className="result-content">
-                                    {result.output}
+                                <div className="result-content md-content">
+                                    <MarkdownView>{result.output}</MarkdownView>
                                 </div>
                             </div>
 

@@ -90,6 +90,19 @@ export default function PaperCanvas() {
         if (detail.sections[0] && !activeSectionKey) {
             setActiveSectionKey(detail.sections[0].key);
         }
+        // Reuse the latest saved audit if there is one. Verify Paper then just
+        // re-opens the cached report instead of re-running the pipeline —
+        // scores stay stable and we don't burn tokens re-judging the same
+        // text. The Re-run button in the panel is the explicit opt-in.
+        try {
+            const audits = await papersApi.listAudits(projectId);
+            if (audits.length > 0) {
+                const latest = await papersApi.getAudit(audits[0].id);
+                setAudit(latest);
+            }
+        } catch {
+            /* cache miss is non-fatal — first click will run a fresh audit. */
+        }
     };
 
     const onSectionUpdate = useCallback((updated) => {
