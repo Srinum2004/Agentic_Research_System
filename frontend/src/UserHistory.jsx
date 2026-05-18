@@ -21,6 +21,44 @@ import {
 //   - paper_studio  → click navigates to /papers/{id} (drafted papers)
 //   - verify_paper  → click navigates to /papers/{id} (uploaded papers,
 //                     audit is already cached on the canvas)
+// Backend persists timestamps via datetime.utcnow() — naive ISO strings with
+// no tz suffix. JS would parse those as local time, which is wrong; force UTC
+// by appending 'Z' when the string lacks a timezone designator.
+const parseUtc = (ts) => {
+    if (!ts) return null;
+    const s = String(ts);
+    const hasTz = /([zZ]|[+-]\d{2}:?\d{2})$/.test(s);
+    return new Date(hasTz ? s : s + 'Z');
+};
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+
+const ordinalSuffix = (n) => {
+    const mod100 = n % 100;
+    if (mod100 >= 11 && mod100 <= 13) return 'th';
+    switch (n % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+};
+
+const formatLongDate = (date) => {
+    if (!date) return '—';
+    const day = date.getDate();
+    return (
+        <>
+            {day}
+            <sup style={{ fontSize: '0.7em', fontWeight: 600, marginLeft: '1px' }}>
+                {ordinalSuffix(day)}
+            </sup>
+            {' '}{MONTHS[date.getMonth()]} {date.getFullYear()}
+        </>
+    );
+};
+
 const KIND_STYLE = {
     research:     { label: 'RESEARCH',     icon: Search,       bg: 'rgba(99, 102, 241, 0.12)',  color: 'var(--primary-color)' },
     paper_studio: { label: 'PAPER STUDIO', icon: FileText,     bg: 'rgba(34, 197, 94, 0.12)',   color: '#22c55e' },
@@ -71,7 +109,7 @@ export default function UserHistory() {
                     },
                     raw: p,
                 })),
-            ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            ].sort((a, b) => parseUtc(b.timestamp) - parseUtc(a.timestamp));
 
             setItems(merged);
         } catch (err) {
@@ -149,8 +187,8 @@ export default function UserHistory() {
                                     return (
                                         <tr key={item.id}>
                                             <td style={{ paddingLeft: '2.5rem' }}>
-                                                <div style={{ fontWeight: 600 }}>{new Date(item.timestamp).toLocaleDateString()}</div>
-                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{new Date(item.timestamp).toLocaleTimeString()}</div>
+                                                <div style={{ fontWeight: 600 }}>{formatLongDate(parseUtc(item.timestamp))}</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{parseUtc(item.timestamp)?.toLocaleTimeString() ?? ''}</div>
                                             </td>
                                             <td>
                                                 <span
