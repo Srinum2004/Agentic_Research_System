@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, RefreshCw, Loader2, Image as ImageIcon, ShieldCheck, UploadCloud, Eye, EyeOff } from 'lucide-react';
+import { Download, RefreshCw, Loader2, ShieldCheck, UploadCloud, Eye, EyeOff } from 'lucide-react';
 import { papersApi } from '../papersApi';
 
 // Pretty-print preset keys so the toolbar doesn't show "ieee_conference".
@@ -17,7 +17,6 @@ export default function CanvasToolbar({
     onExport,
     onRegenerateAll,
     regenerating,
-    onUploadFigure,
     onAudit,
     auditing,
     hasAudit = false,        // an audit has already been generated this session
@@ -87,29 +86,15 @@ export default function CanvasToolbar({
                 </span>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
-                {/* Drafted papers (Paper Studio) keep the full toolbar — Draft
-                    all / Figure / Export work against the editable section
-                    cards. Uploaded papers are read-only verification only:
-                    just the Verify Paper button is shown. */}
                 {!readOnly && (
-                    <>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={onRegenerateAll}
-                            disabled={regenerating}
-                            title="Draft every empty section"
-                        >
-                            {regenerating ? <Loader2 size={14} className="spin" /> : <RefreshCw size={14} />} Draft all
-                        </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={onUploadFigure}
-                            title="Figure uploads are temporarily disabled"
-                            disabled
-                        >
-                            <ImageIcon size={14} /> Figure
-                        </button>
-                    </>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={onRegenerateAll}
+                        disabled={regenerating}
+                        title="Draft every empty section"
+                    >
+                        {regenerating ? <Loader2 size={14} className="spin" /> : <RefreshCw size={14} />} Draft all
+                    </button>
                 )}
                 <button
                     className="btn btn-primary"

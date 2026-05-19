@@ -320,7 +320,6 @@ export default function PaperCanvas() {
                         sections={sections}
                         onRegenerateAll={regenerateAll}
                         regenerating={draftingAll}
-                        onUploadFigure={() => setShowFigure(true)}
                         onAudit={toggleOrRunAudit}
                         hasAudit={!!audit}
                         auditPanelOpen={auditOpen}
